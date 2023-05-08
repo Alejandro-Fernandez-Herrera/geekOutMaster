@@ -1,0 +1,10 @@
+# pack-refs with: peeled fully-peeled sorted 
+e5c5b433d700c0b2fa2e6c92dd7374a31338fc01 refs/heads/DVVID6-patch-1
+b12900c9f5e10be30dd1400f9908b7454322b80c refs/heads/dados
+01417045cadcc2e2ac8183cf57d85e47e6a80db3 refs/heads/development
+d09dee8e60a799c91c9a75c2105d6bb58a68bb6d refs/heads/main
+9af4b2db6387dd6009123cf7f9c9212f26865e1c refs/heads/model
+e5c5b433d700c0b2fa2e6c92dd7374a31338fc01 refs/pull/1/head
+dc1d1a7919f01b5d1187bb8a94e02309cff7decc refs/pull/2/head
+ac0d8b9a9eab384f64abfed81e591c26a22dbb39 refs/pull/3/head
+b12900c9f5e10be30dd1400f9908b7454322b80c refs/pull/4/head
