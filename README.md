@@ -1,4 +1,4 @@
 # geekOutMaster
 Autores
-Alejandro Fernandez n/
+Alejandro Fernandez 
 Jose David Giraldo
