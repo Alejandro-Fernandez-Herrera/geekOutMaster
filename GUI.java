@@ -89,7 +89,21 @@ public class GUI extends JFrame {
         constraints.anchor=GridBagConstraints.LINE_END;
         this.add(salir,constraints);
 
-        
+        /**
+         * Creacion de panel dados activos
+         */
+        panelDadosActivos = new JPanel(); // se crea un panel secundario con la funcion de ubicar los dados activos
+        panelDadosActivos.setPreferredSize(new Dimension(300,300)); // dimensiones del panel
+        panelDadosActivos.setBorder(BorderFactory.createTitledBorder("Dados Activos")); // titulo del panel
+        panelDadosActivos.setBackground(Color.white);
+        //panelDadosActivos.add(mano);
+
+        constraints.gridx=3;
+        constraints.gridy=2;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.CENTER;
+        add(panelDadosActivos,constraints); //esto agrega el JPanel creado a la ventana principal para inicializarlo
 
     }
 }
