@@ -143,20 +143,33 @@ public class GUI extends JFrame {
          */
         panelPuntaje = new JPanel();
         panelPuntaje.setLayout(new GridLayout(0,1));//GridLayout con una sola columna, y el número de filas será determinado automáticamente en función del número de componentes que se agreguen al panel.
-        panelPuntaje.setPreferredSize(new Dimension(200,100));
+        panelPuntaje.setPreferredSize(new Dimension(300,300));
         panelPuntaje.setBorder(BorderFactory.createTitledBorder("Puntaje"));
         panelPuntaje.setBackground(new Color(112, 215, 163, 255));
         //panelPuntaje.add(textoPuntajeTotal);
         //panelPuntaje.add(textoPuntaje);
 
-        constraints.gridx=3;
+        constraints.gridx=2;
         constraints.gridy=3;
         constraints.gridwidth=3;
         constraints.fill=GridBagConstraints.BOTH;
         constraints.anchor=GridBagConstraints.CENTER;
         add(panelPuntaje,constraints);
 
-        
+        /**
+         *  Creacion de panel ronda
+         */
+        panelRonda = new JPanel();
+        panelRonda.setPreferredSize(new Dimension(300,300));
+        panelRonda.setBorder(BorderFactory.createTitledBorder("Ronda"));
+        panelRonda.setBackground(new Color(69, 201, 248, 255));
+
+        constraints.gridx=5;
+        constraints.gridy=3;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.CENTER;
+        add(panelRonda,constraints);
     }
 }
 
