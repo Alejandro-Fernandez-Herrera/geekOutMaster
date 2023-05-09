@@ -6,7 +6,7 @@ import java.awt.*;
 public class GUI extends JFrame {
     private Header headerProject;
     private JLabel mano, textoPuntaje, textoPuntajeTotal, textoRonda;
-    private JButton lanzar, ayuda, salir, creditos, botonExplicacion, continuarReiniciar;
+    private JButton lanzar, ayuda, salir, creditos, botonInstrucciones, continuarReiniciar;
     private JPanel panelDadosActivos, panelDadosUtilizados, panelDadosInactivos, panelPuntaje, panelRonda;
     private ImageIcon imageMano, imageExplicacion, imageDado;
 
@@ -101,16 +101,57 @@ public class GUI extends JFrame {
         constraints.anchor=GridBagConstraints.CENTER;
         add(lanzar,constraints);
 
-        
+        /**
+         * Creacion de boton "Nuevo dado"
+         */
+        continuarReiniciar = new JButton();
+        continuarReiniciar.setText("Continuar ronda");
+        //continuarReiniciar.addActionListener(escucha);
+        continuarReiniciar.setName("continuarReiniciar");
+        continuarReiniciar.setBackground(Color.lightGray);
+        continuarReiniciar.setEnabled(false);
 
+        constraints.gridx=6;
+        constraints.gridy= 5;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.CENTER;
+        constraints.anchor=GridBagConstraints.CENTER;
+        add(continuarReiniciar,constraints);
+        /**
+         * Creacion de boton "instrucciones"
+         */
+        botonInstrucciones = new JButton("Instrucciones del juego");
+        //botonInstrucciones.addActionListener(escucha);
+        botonInstrucciones.setBackground(Color.ORANGE);
+        constraints.gridx=6;
+        constraints.gridy=3;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.NONE;
+        constraints.anchor=GridBagConstraints.CENTER;
+        this.add(botonInstrucciones,constraints);
         /**
          * Creacion de panel dados activos
-         */
+
         panelDadosActivos = new JPanel(); // se crea un panel secundario con la funcion de ubicar los dados activos
         panelDadosActivos.setPreferredSize(new Dimension(300,300)); // dimensiones del panel
         panelDadosActivos.setBorder(BorderFactory.createTitledBorder("Dados Activos")); // titulo del panel
         panelDadosActivos.setBackground(Color.white);
-        //panelDadosActivos.add(mano);
+        //panelDadosActivos.add(mano);*/
+
+        panelDadosActivos = new JPanel() {
+            // Sobrescribimos el método paintComponent() para dibujar la imagen de fondo
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Cargamos la imagen de fondo
+                ImageIcon imagenFondo = new ImageIcon("recursos/2474216.jpg");
+                // Dibujamos la imagen de fondo en el panel
+                g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
+
+        panelDadosActivos.setPreferredSize(new Dimension(300,300));
+        panelDadosActivos.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
 
         constraints.gridx=3;
         constraints.gridy=2;
@@ -121,12 +162,25 @@ public class GUI extends JFrame {
 
         /**
          * Creacion de panel dados inactivos
-         */
+
         panelDadosInactivos =  new JPanel();
         panelDadosInactivos.setPreferredSize(new Dimension(300,300));
         panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Inactivos"));
         panelDadosInactivos.setBackground(Color.white);
-
+         */
+        panelDadosInactivos = new JPanel() {
+            // Sobrescribimos el método paintComponent() para dibujar la imagen de fondo
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Cargamos la imagen de fondo
+                ImageIcon imagenFondo = new ImageIcon("recursos/2474216.jpg");
+                // Dibujamos la imagen de fondo en el panel
+                g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
+        panelDadosInactivos.setPreferredSize(new Dimension(300,300));
+        panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
         //ubico el panel en la grilla para que quede ordenado
         constraints.gridx=0;
         constraints.gridy=2;
@@ -137,12 +191,27 @@ public class GUI extends JFrame {
 
         /**
          * Creacion de panel dados utilizados
-         */
+
 
         panelDadosUtilizados = new JPanel();
         panelDadosUtilizados.setPreferredSize(new Dimension(300,300));
         panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados utilizados"));
         panelDadosUtilizados.setBackground(Color.white);
+         */
+
+        panelDadosUtilizados = new JPanel() {
+            // Sobrescribimos el método paintComponent() para dibujar la imagen de fondo
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Cargamos la imagen de fondo
+                ImageIcon imagenFondo = new ImageIcon("recursos/2474216.jpg");
+                // Dibujamos la imagen de fondo en el panel
+                g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
+        panelDadosUtilizados.setPreferredSize(new Dimension(300,300));
+        panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
 
         //ubico el panel en la grilla para que quede ordenado
         constraints.gridx=6;
