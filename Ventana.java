@@ -33,6 +33,19 @@ public class GUI extends JFrame{
         this.getContentPane().setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
+
+        //Configurar JComponents
+
+        /**
+         * Creacion del titulo
+         */
+        headerProject = new Header("Geek Out! Masters", Color.BLACK);
+
+        constraints.gridx=3;
+        constraints.gridy=1;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.CENTER;
+        this.add(headerProject,constraints);
 }
 
 
