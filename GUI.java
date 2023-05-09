@@ -3,25 +3,23 @@ package myProject;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * This class is used for ...
- * @autor Carlos Felipe Montoya carlos.felipe.montoya@correounivalle.edu.co
- * @version v.1.0.0 date:21/03/2023
- */
 public class GUI extends JFrame {
-
     private Header headerProject;
+    private JLabel mano, textoPuntaje, textoPuntajeTotal, textoRonda;
+    private JButton lanzar, ayuda, salir, creditos, botonExplicacion, continuarReiniciar;
+    private JPanel panelDadosActivos, panelDadosUtilizados, panelDadosInactivos, panelPuntaje, panelRonda;
+    private ImageIcon imageMano, imageExplicacion, imageDado;
 
     /**
-     * Constructor of GUI class
+     * Constructor de la clase GUI
      */
-    public GUI(){
+    public GUI() {
         initGUI();
 
-        //Default JFrame configuration
-        this.setTitle("The Title app");
-        this.setSize(200,100);
-        //this.pack();
+        //Configuración por defecto del JFrame
+        this.setTitle("Geek Out Masters");
+        this.setUndecorated(true);
+        this.pack();
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -29,33 +27,55 @@ public class GUI extends JFrame {
     }
 
     /**
-     * This method is used to set up the default JComponent Configuration,
-     * create Listener and control Objects used for the GUI class
+     * Este método se utiliza para configurar la configuración predeterminada de JComponent,
+     * crear objetos de escucha y control utilizados para la clase GUI
      */
     private void initGUI() {
-        //Set up JFrame Container's Layout
-        //Create Listener Object and Control Object
-        //Set up JComponents
-        headerProject = new Header("Header ...", Color.BLACK);
+        //Configurar el diseño del contenedor JFrame
+        this.getContentPane().setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
 
-        this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
-    }
 
-    /**
-     * Main process of the Java program
-     * @param args Object used in order to send input data from command line when
-     *             the program is execute by console.
-     */
-    public static void main(String[] args){
-        EventQueue.invokeLater(() -> {
-            GUI miProjectGUI = new GUI();
-        });
-    }
+        //Configurar JComponents
 
-    /**
-     * inner class that extends an Adapter Class or implements Listeners used by GUI class
-     */
-    private class Escucha {
+        /**
+         * Creacion del titulo
+         */
+        headerProject = new Header("Geek Out! Masters", Color.BLACK);
 
+        constraints.gridx = 3;
+        constraints.gridy = 1;
+        constraints.gridwidth = 3;
+        constraints.fill = GridBagConstraints.CENTER;
+        this.add(headerProject, constraints);
+
+        /**
+         * Creacion de boton "Ayuda"
+         */
+        ayuda = new JButton(" help ");
+        //ayuda.addActionListener(escucha);
+        ayuda.setBackground(Color.green);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.CENTER;
+        this.add(ayuda, constraints);
+
+        /**
+         * Creacion de boton "Créditos"
+         */
+        creditos = new JButton(" Créditos ");
+        //creditos.addActionListener(escucha);
+        creditos.setBackground(Color.yellow);
+        constraints.gridx=2;
+        constraints.gridy=1;
+        constraints.gridwidth=1;
+        constraints.fill=GridBagConstraints.CENTER;
+        constraints.anchor=GridBagConstraints.LINE_START;
+        this.add(creditos,constraints);
     }
 }
+
+
+

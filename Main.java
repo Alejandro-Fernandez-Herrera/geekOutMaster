@@ -7,7 +7,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
         public void run() {
 
-            Ventana PRIMER = new Ventana();
+            GUI PRIMER = new GUI();
             PRIMER.setVisible(true);
 
 
