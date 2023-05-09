@@ -46,6 +46,19 @@ public class GUI extends JFrame{
         constraints.gridwidth=3;
         constraints.fill=GridBagConstraints.CENTER;
         this.add(headerProject,constraints);
+
+        /**
+         * Creacion de boton "Ayuda"
+         */
+        ayuda = new JButton(" help ");
+        //ayuda.addActionListener(escucha);
+        ayuda.setBackground(Color.green);
+        constraints.gridx=0;
+        constraints.gridy=1;
+        constraints.gridwidth=2;
+        constraints.fill=GridBagConstraints.NONE;
+        constraints.anchor=GridBagConstraints.CENTER;
+        this.add(ayuda,constraints); 
 }
 
 
