@@ -90,6 +90,20 @@ public class GUI extends JFrame {
         this.add(salir,constraints);
 
         /**
+         * Creacion de boton "lanzar"
+         */
+        lanzar = new JButton("TIRAR DADOS");
+        lanzar.setBackground(Color.LIGHT_GRAY);
+        constraints.gridx=4;
+        constraints.gridy= 5;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.CENTER;
+        constraints.anchor=GridBagConstraints.CENTER;
+        add(lanzar,constraints);
+
+        
+
+        /**
          * Creacion de panel dados activos
          */
         panelDadosActivos = new JPanel(); // se crea un panel secundario con la funcion de ubicar los dados activos
@@ -170,6 +184,8 @@ public class GUI extends JFrame {
         constraints.fill=GridBagConstraints.BOTH;
         constraints.anchor=GridBagConstraints.CENTER;
         add(panelRonda,constraints);
+
+
     }
 }
 
