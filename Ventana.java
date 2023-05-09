@@ -1,29 +1,39 @@
 package myProject;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class Ventana extends JFrame {
-    private JPanel ventana;
-    private JButton iniciarJuegoButton;
-    private JButton salirDelJuegoButton;
+public class GUI extends JFrame{
+    private Header headerProject;
+    private JLabel mano, textoPuntaje, textoPuntajeTotal, textoRonda;
+    private JButton lanzar, ayuda, salir, creditos, botonExplicacion, continuarReiniciar;
+    private JPanel panelDadosActivos, panelDadosUtilizados, panelDadosInactivos, panelPuntaje, panelRonda;
+    private ImageIcon imageMano, imageExplicacion, imageDado;
 
-    public Ventana() {
-        // Configuramos la ventana
-        setSize(300, 200);
-        setLocationRelativeTo(null);
-        setTitle("GEEK OUT! MASTERS");
+    /**
+     * Constructor de la clase GUI
+     */
+    public GUI(){
+        initGUI();
 
-        // Configuramos el panel
-        ventana = new JPanel();
-        iniciarJuegoButton = new JButton("Iniciar Juego");
-        salirDelJuegoButton = new JButton("Salir del Juego");
-
-        ventana.add(iniciarJuegoButton);
-        ventana.add(salirDelJuegoButton);
-
-        add(ventana);
-
-        // Mostramos la ventana
-        setVisible(true);
+        //Configuración por defecto del JFrame
+        this.setTitle("Geek Out Masters");
+        this.setUndecorated(true);
+        this.pack();
+        this.setResizable(true);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
+    /**
+     * Este método se utiliza para configurar la configuración predeterminada de JComponent,
+     * crear objetos de escucha y control utilizados para la clase GUI
+     */
+    private void initGUI() {
+        //Configurar el diseño del contenedor JFrame
+        this.getContentPane().setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+
 }
+
+
+
