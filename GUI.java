@@ -74,6 +74,23 @@ public class GUI extends JFrame {
         constraints.fill=GridBagConstraints.CENTER;
         constraints.anchor=GridBagConstraints.LINE_START;
         this.add(creditos,constraints);
+
+
+        /**
+         * Creacion de boton "Salir"
+         */
+        salir = new JButton("Salir");
+        //salir.addActionListener(escucha);
+        salir.setBackground(Color.red);
+        constraints.gridx=8;
+        constraints.gridy=1;
+        constraints.gridwidth=1;
+        constraints.fill=GridBagConstraints.NONE;
+        constraints.anchor=GridBagConstraints.LINE_END;
+        this.add(salir,constraints);
+
+        
+
     }
 }
 
