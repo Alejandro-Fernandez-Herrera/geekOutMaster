@@ -138,11 +138,25 @@ public class GUI extends JFrame {
         constraints.anchor=GridBagConstraints.CENTER;
         add(panelDadosUtilizados,constraints); //agrega el panel y el constrains
 
+        /**
+         * Creacion de panel puntaje
+         */
+        panelPuntaje = new JPanel();
+        panelPuntaje.setLayout(new GridLayout(0,1));//GridLayout con una sola columna, y el número de filas será determinado automáticamente en función del número de componentes que se agreguen al panel.
+        panelPuntaje.setPreferredSize(new Dimension(200,100));
+        panelPuntaje.setBorder(BorderFactory.createTitledBorder("Puntaje"));
+        panelPuntaje.setBackground(new Color(112, 215, 163, 255));
+        //panelPuntaje.add(textoPuntajeTotal);
+        //panelPuntaje.add(textoPuntaje);
+
+        constraints.gridx=3;
+        constraints.gridy=3;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.CENTER;
+        add(panelPuntaje,constraints);
+
         
-
-
-
-
     }
 }
 
