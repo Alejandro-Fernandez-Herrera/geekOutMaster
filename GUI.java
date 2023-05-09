@@ -105,6 +105,9 @@ public class GUI extends JFrame {
         constraints.anchor=GridBagConstraints.CENTER;
         add(panelDadosActivos,constraints); //esto agrega el JPanel creado a la ventana principal para inicializarlo
 
+        /**
+         * Creacion de panel dados inactivos
+         */
         panelDadosInactivos =  new JPanel();
         panelDadosInactivos.setPreferredSize(new Dimension(300,300));
         panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Inactivos"));
@@ -117,6 +120,28 @@ public class GUI extends JFrame {
         constraints.fill=GridBagConstraints.BOTH;
         constraints.anchor=GridBagConstraints.CENTER;
         add(panelDadosInactivos,constraints); //agrega el panel y el constrains
+
+        /**
+         * Creacion de panel dados utilizados
+         */
+
+        panelDadosUtilizados = new JPanel();
+        panelDadosUtilizados.setPreferredSize(new Dimension(300,300));
+        panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados utilizados"));
+        panelDadosUtilizados.setBackground(Color.white);
+
+        //ubico el panel en la grilla para que quede ordenado
+        constraints.gridx=6;
+        constraints.gridy=2;
+        constraints.gridwidth=3;
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.CENTER;
+        add(panelDadosUtilizados,constraints); //agrega el panel y el constrains
+
+        
+
+
+
 
     }
 }
