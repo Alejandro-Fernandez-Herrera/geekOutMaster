@@ -180,7 +180,7 @@ public class GUI extends JFrame {
             }
         };
         panelDadosInactivos.setPreferredSize(new Dimension(300,300));
-        panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
+        panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Inactivos"));
         //ubico el panel en la grilla para que quede ordenado
         constraints.gridx=0;
         constraints.gridy=2;
@@ -211,7 +211,7 @@ public class GUI extends JFrame {
             }
         };
         panelDadosUtilizados.setPreferredSize(new Dimension(300,300));
-        panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
+        panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados Utilizados"));
 
         //ubico el panel en la grilla para que quede ordenado
         constraints.gridx=6;
