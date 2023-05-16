@@ -1,271 +1,246 @@
-package myProject;
+package myProject.vista;
+
+
+import myProject.controlador.ControlDado;
+import myProject.controlador.ControlRonda;
+import myProject.modelo.Dado;
+import myProject.vista.Help;
+import myProject.vista.ImagenDado;
+import myProject.vista.Background;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class GUI extends JFrame {
-    private JLabel mano, textoPuntaje, textoPuntajeTotal, textoRonda;
-    private JButton lanzar, ayuda, salir, creditos, botonInstrucciones, continuarReiniciar;
-    private JPanel panelDadosActivos, panelDadosUtilizados, panelDadosInactivos, panelPuntaje;
-    private ImageIcon imageMano, imageExplicacion, imageDado;
-    private JTextArea mensajesSalida;
+    private static ImagenDado dados;
+    public static JFrame frame;
+    private static JPanel fondo, opciones;
+    private static vista.Titulo titulo;
+    private static Listener listener;
+    public static JButton btnLanzarDado;
+    private int conteo = 1, dado;
 
-    /**
-     * Constructor de la clase GUI
-     */
+
     public GUI() {
+
+        listener = new Listener();
+        titulo = new vista.Titulo();
+        frame = new JFrame();
+        frame.setLayout(new BorderLayout());
+        opciones = new JPanel(new GridLayout(2, 2));
+        String texto = "De clic en el botón 'Lanzar Dados'";
+        opciones.setBorder(titulo.gettitulo(texto));
+        opciones.setOpaque(false);
+
+        fondo = new Background(new ImageIcon(getClass().getResource("/myProject/recursos/Fondo.png")).getImage());
+        frame.setContentPane(fondo);
+
+        dados = new ImagenDado();
+        opciones.add(dados.getDadosActivos());
+        opciones.add(dados.getDadsInactivation());
+        opciones.add(dados.getTablaPuntaje());
+        opciones.add(dados.getDadosUtilizados());
+
+        frame.getContentPane().add(opciones, BorderLayout.CENTER);
+
         initGUI();
-
-        //Configuración por defecto del JFrame
-        this.setTitle("Geek Out Masters");
-        this.setUndecorated(true);
-        this.pack();
-        this.setResizable(true);
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setIconImage(new ImageIcon(getClass().getResource("/myProject/recursos/Logo.png")).getImage());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setTitle("GEEK OUT! MASTERS");
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /**
-     * Este método se utiliza para configurar la configuración predeterminada de JComponent,
-     * crear objetos de escucha y control utilizados para la clase GUI
-     */
-    private void initGUI() {
-        //Configurar el diseño del contenedor JFrame
-        this.getContentPane().setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
+    private static void initGUI() {
+        Help ayuda = new Help();
+        btnLanzarDado = new JButton("Lanzar Dado");
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 145));
+        panelBotones.setPreferredSize(new Dimension(200, 650));
+        panelBotones.add(btnLanzarDado);
+        panelBotones.add(ayuda.botonAyuda);
+        panelBotones.setOpaque(false);
+        String texto = "Opciones";
+        panelBotones.setBorder(titulo.gettitulo(texto));
+        frame.getContentPane().add(panelBotones, BorderLayout.EAST);
+        btnLanzarDado.addActionListener(listener);
 
 
-        //Configurar JComponents
-
-        /**
-         * Creacion del titulo
-         */
-        headerProject = new Header("Geek Out! Masters", Color.BLACK);
-
-        constraints.gridx = 3;
-        constraints.gridy = 1;
-        constraints.gridwidth = 3;
-        constraints.fill = GridBagConstraints.CENTER;
-        this.add(headerProject, constraints);
-
-        /**
-         * Creacion de boton "Ayuda"
-         */
-        ayuda = new JButton(" help ");
-        //ayuda.addActionListener(escucha);
-        ayuda.setBackground(Color.green);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = 2;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.CENTER;
-        this.add(ayuda, constraints);
-
-        /**
-         * Creacion de boton "Créditos"
-         */
-        creditos = new JButton(" Créditos ");
-        //creditos.addActionListener(escucha);
-        creditos.setBackground(Color.yellow);
-        constraints.gridx=2;
-        constraints.gridy=1;
-        constraints.gridwidth=1;
-        constraints.fill=GridBagConstraints.CENTER;
-        constraints.anchor=GridBagConstraints.LINE_START;
-        this.add(creditos,constraints);
-
-
-        /**
-         * Creacion de boton "Salir"
-         */
-        salir = new JButton("Salir");
-        //salir.addActionListener(escucha);
-        salir.setBackground(Color.red);
-        constraints.gridx=8;
-        constraints.gridy=1;
-        constraints.gridwidth=1;
-        constraints.fill=GridBagConstraints.NONE;
-        constraints.anchor=GridBagConstraints.LINE_END;
-        this.add(salir,constraints);
-
-        /**
-         * Creacion de boton "lanzar"
-         */
-        lanzar = new JButton("TIRAR DADOS");
-        lanzar.setBackground(Color.LIGHT_GRAY);
-        constraints.gridx=4;
-        constraints.gridy= 5;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.CENTER;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(lanzar,constraints);
-
-        /**
-         * Creacion de boton "Nuevo dado"
-         */
-        continuarReiniciar = new JButton();
-        continuarReiniciar.setText("Continuar ronda");
-        //continuarReiniciar.addActionListener(escucha);
-        continuarReiniciar.setName("continuarReiniciar");
-        continuarReiniciar.setBackground(Color.lightGray);
-        continuarReiniciar.setEnabled(false);
-
-        constraints.gridx=6;
-        constraints.gridy= 5;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.CENTER;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(continuarReiniciar,constraints);
-        /**
-         * Creacion de boton "instrucciones"
-         */
-        botonInstrucciones = new JButton("Instrucciones del juego");
-        //botonInstrucciones.addActionListener(escucha);
-        botonInstrucciones.setBackground(Color.ORANGE);
-        constraints.gridx=6;
-        constraints.gridy=3;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.NONE;
-        constraints.anchor=GridBagConstraints.CENTER;
-        this.add(botonInstrucciones,constraints);
-        /**
-         * Creacion de panel dados activos
-
-        panelDadosActivos = new JPanel(); // se crea un panel secundario con la funcion de ubicar los dados activos
-        panelDadosActivos.setPreferredSize(new Dimension(300,300)); // dimensiones del panel
-        panelDadosActivos.setBorder(BorderFactory.createTitledBorder("Dados Activos")); // titulo del panel
-        panelDadosActivos.setBackground(Color.white);
-        //panelDadosActivos.add(mano);*/
-
-        panelDadosActivos = new JPanel() {
-            // Sobrescribimos el método paintComponent() para dibujar la imagen de fondo
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Cargamos la imagen de fondo
-                ImageIcon imagenFondo = new ImageIcon("recursos/mesademadera.jpg");
-                // Dibujamos la imagen de fondo en el panel
-                g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
-            }
-        };
-
-        panelDadosActivos.setPreferredSize(new Dimension(300,300));
-        panelDadosActivos.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
-
-        constraints.gridx=3;
-        constraints.gridy=2;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.BOTH;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(panelDadosActivos,constraints); //esto agrega el JPanel creado a la ventana principal para inicializarlo
-
-        /**
-         * Creacion de panel dados inactivos
-
-        panelDadosInactivos =  new JPanel();
-        panelDadosInactivos.setPreferredSize(new Dimension(300,300));
-        panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Inactivos"));
-        panelDadosInactivos.setBackground(Color.white);
-         */
-        panelDadosInactivos = new JPanel() {
-            // Sobrescribimos el método paintComponent() para dibujar la imagen de fondo
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Cargamos la imagen de fondo
-                ImageIcon imagenFondo = new ImageIcon("recursos/2474216.jpg");
-                // Dibujamos la imagen de fondo en el panel
-                g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
-            }
-        };
-        panelDadosInactivos.setPreferredSize(new Dimension(300,300));
-        panelDadosInactivos.setBorder(BorderFactory.createTitledBorder("Dados Inactivos"));
-        //ubico el panel en la grilla para que quede ordenado
-        constraints.gridx=0;
-        constraints.gridy=2;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.BOTH;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(panelDadosInactivos,constraints); //agrega el panel y el constrains
-
-        /**
-         * Creacion de panel dados utilizados
-
-
-        panelDadosUtilizados = new JPanel();
-        panelDadosUtilizados.setPreferredSize(new Dimension(300,300));
-        panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados utilizados"));
-        panelDadosUtilizados.setBackground(Color.white);
-         */
-
-        panelDadosUtilizados = new JPanel() {
-            // Sobrescribimos el método paintComponent() para dibujar la imagen de fondo
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Cargamos la imagen de fondo
-                ImageIcon imagenFondo = new ImageIcon("recursos/2474216.jpg");
-                // Dibujamos la imagen de fondo en el panel
-                g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
-            }
-        };
-        panelDadosUtilizados.setPreferredSize(new Dimension(300,300));
-        panelDadosUtilizados.setBorder(BorderFactory.createTitledBorder("Dados Utilizados"));
-
-        //ubico el panel en la grilla para que quede ordenado
-        constraints.gridx=6;
-        constraints.gridy=2;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.BOTH;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(panelDadosUtilizados,constraints); //agrega el panel y el constrains
-
-        /**
-         * Creacion de panel puntaje
-         */
-        panelPuntaje = new JPanel();
-        panelPuntaje.setLayout(new GridLayout(0,1));//GridLayout con una sola columna, y el número de filas será determinado automáticamente en función del número de componentes que se agreguen al panel.
-        panelPuntaje.setPreferredSize(new Dimension(300,300));
-        panelPuntaje.setBorder(BorderFactory.createTitledBorder("Puntaje"));
-        panelPuntaje.setBackground(new Color(112, 215, 163, 255));
-        //panelPuntaje.add(textoPuntajeTotal);
-        //panelPuntaje.add(textoPuntaje);
-
-        constraints.gridx=2;
-        constraints.gridy=3;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.BOTH;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(panelPuntaje,constraints);
-
-        // Puntaje ronda
-        textoPuntaje = new JLabel();
-        textoPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Puntaje total
-        textoPuntajeTotal = new JLabel();
-        textoPuntajeTotal.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Ronda
-        textoRonda = new JLabel();
-
-        /**
-         * Creación mensaje de atención
-         */
-        mensajesSalida= new JTextArea(2,28);
-        mensajesSalida.setText("Usa el botón (help) para ver las reglas del juego");
-        mensajesSalida.setBorder(BorderFactory.createTitledBorder("Atención: "));
-        mensajesSalida.setEditable(false);
-        mensajesSalida.setBackground(new Color(241, 113, 113, 255));
-        constraints.gridx=3;
-        constraints.gridy=5;
-        constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.NONE;
-        constraints.anchor=GridBagConstraints.CENTER;
-        add(mensajesSalida,constraints);
     }
+
+
+
+
+    private static void reiniciar() {
+
+        opciones.removeAll();
+
+        dados = new ImagenDado();
+        opciones.add(dados.getDadosActivos());
+        opciones.add(dados.getDadsInactivation());
+        opciones.add(dados.getTablaPuntaje());
+        opciones.add(dados.getDadosUtilizados());
+        opciones.revalidate();
+        opciones.repaint();
+
+    }
+
+    public static void mensajeRondas(int dado) {
+        switch (dado) {
+            case 1:
+                JOptionPane.showConfirmDialog(null,
+                        "HAS GANADO ESTA RONDA, DA CLIC EN LANZAR DADOS PARA VOLVER A JUGAR",
+                        "INFORMACIÓN",JOptionPane.CLOSED_OPTION);
+                btnLanzarDado.setEnabled(true);
+                break;
+            case 2:
+                JOptionPane.showConfirmDialog(null,
+                        "HAS PERDIDO ESTA RONDA Y LOS PUNTOS, DA CLIC EN LANZAR DADOS PARA VOLVER A JUGAR",
+                        "INFORMACIÓN",JOptionPane.CLOSED_OPTION);
+                btnLanzarDado.setEnabled(true);
+                break;
+            case 3:
+                JOptionPane.showConfirmDialog(null,
+                        "EN ESTA RONDA NO SUMAS PUNTOS, DA CLIC EN LANZAR DADOS PARA VOLVER A JUGAR",
+                        "INFORMACIÓN",JOptionPane.CLOSED_OPTION);
+                btnLanzarDado.setEnabled(true);
+                break;
+            case 4:
+                JOptionPane.showConfirmDialog(null,
+                        "EN ESTA RONDA NO SUMAS PUNTOS, DA CLIC EN LANZAR DADOS PARA VOLVER A JUGAR",
+                        "INFORMACIÓN",JOptionPane.CLOSED_OPTION);
+                btnLanzarDado.setEnabled(true);
+                break;
+            case 5:
+                JOptionPane.showConfirmDialog(null,
+                        "EN ESTA RONDA NO SUMAS PUNTOS, DA CLIC EN LANZAR DADOS PARA VOLVER A JUGAR",
+                        "INFORMACIÓN",JOptionPane.CLOSED_OPTION);
+                btnLanzarDado.setEnabled(true);
+                break;
+            case 6:
+                JOptionPane.showConfirmDialog(null,
+                        "ES TU ULTIMA OPORTUNIDAD",
+                        "INFORMACIÓN",JOptionPane.CLOSED_OPTION);
+                btnLanzarDado.setEnabled(true);
+                break;
+            default:
+                System.out.println("FALLO");
+                break;
+        }
+
+
+
+    }
+
+
+
+
+
+    public static void main(String[] arg) {
+
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                GUI vista = new GUI();
+
+
+            }
+        });
+    }
+
+
+    public class Listener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            ImagenDado imagenDado = new ImagenDado();
+
+            if (e.getSource() == btnLanzarDado) {
+                String texto2 = "Ronda#" + conteo;
+                ControlRonda controlRonda = new ControlRonda();
+                controlRonda.rondas(conteo);
+                imagenDado.actualizar();
+
+                System.out.println("Entro en la primera ronda" + conteo);
+
+                if (controlRonda.rondas(conteo) == 1) {
+                    Dado dado = new Dado();
+                    ControlDado controlDado = new ControlDado(dado, dados);
+                    controlDado.LanzarDado();
+                    opciones.setBorder(titulo.gettitulo(texto2));
+                    dados.mostrarBotones();
+                    System.out.println("Entro a la ronda " + conteo);
+                    btnLanzarDado.setEnabled(false);
+                }
+                if (controlRonda.rondas(conteo) == 2) {
+
+
+                    reiniciar();
+                    Dado dado = new Dado();
+                    ControlDado controlDado = new ControlDado(dado, dados);
+                    controlDado.LanzarDado();
+                    opciones.setBorder(titulo.gettitulo(texto2));
+                    dados.mostrarBotones();
+                    System.out.println("Entro a la ronda " + conteo);
+                    btnLanzarDado.setEnabled(false);
+                }
+                if (controlRonda.rondas(conteo) == 3) {
+                    opciones.removeAll();
+                    reiniciar();
+                    Dado dado = new Dado();
+                    ControlDado controlDado = new ControlDado(dado, dados);
+                    controlDado.LanzarDado();
+                    opciones.setBorder(titulo.gettitulo(texto2));
+                    dados.mostrarBotones();
+                    System.out.println("Entro a la ronda " + conteo);
+                    btnLanzarDado.setEnabled(false);
+                }
+                if (controlRonda.rondas(conteo) == 4) {
+                    opciones.removeAll();
+                    reiniciar();
+                    Dado dado = new Dado();
+                    ControlDado controlDado = new ControlDado(dado, dados);
+                    controlDado.LanzarDado();
+                    opciones.setBorder(titulo.gettitulo(texto2));
+                    dados.mostrarBotones();
+                    System.out.println("Entro a la ronda " + conteo);
+                    btnLanzarDado.setEnabled(false);
+                }
+                if (controlRonda.rondas(conteo) == 5) {
+                    opciones.removeAll();
+                    reiniciar();
+                    Dado dado = new Dado();
+                    ControlDado controlDado = new ControlDado(dado, dados);
+                    controlDado.LanzarDado();
+                    opciones.setBorder(titulo.gettitulo(texto2));
+                    dados.mostrarBotones();
+                    System.out.println("Entro a la ronda " + conteo);
+                    btnLanzarDado.setEnabled(false);
+                }
+                frame.revalidate();
+                frame.repaint();
+                conteo++;
+
+            }
+
+
+        }
+
+
+    }
+
 }
+
+
+
+
+
+
 
 
 
