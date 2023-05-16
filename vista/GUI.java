@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUI extends JFrame {
-    private Header headerProject;
     private JLabel mano, textoPuntaje, textoPuntajeTotal, textoRonda;
     private JButton lanzar, ayuda, salir, creditos, botonInstrucciones, continuarReiniciar;
-    private JPanel panelDadosActivos, panelDadosUtilizados, panelDadosInactivos, panelPuntaje, panelRonda;
+    private JPanel panelDadosActivos, panelDadosUtilizados, panelDadosInactivos, panelPuntaje;
     private ImageIcon imageMano, imageExplicacion, imageDado;
+    private JTextArea mensajesSalida;
 
     /**
      * Constructor de la clase GUI
@@ -144,7 +144,7 @@ public class GUI extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Cargamos la imagen de fondo
-                ImageIcon imagenFondo = new ImageIcon("recursos/2474216.jpg");
+                ImageIcon imagenFondo = new ImageIcon("recursos/mesademadera.jpg");
                 // Dibujamos la imagen de fondo en el panel
                 g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
             }
@@ -239,22 +239,31 @@ public class GUI extends JFrame {
         constraints.anchor=GridBagConstraints.CENTER;
         add(panelPuntaje,constraints);
 
+        // Puntaje ronda
+        textoPuntaje = new JLabel();
+        textoPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Puntaje total
+        textoPuntajeTotal = new JLabel();
+        textoPuntajeTotal.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Ronda
+        textoRonda = new JLabel();
+
         /**
-         *  Creacion de panel ronda
+         * Creación mensaje de atención
          */
-        panelRonda = new JPanel();
-        panelRonda.setPreferredSize(new Dimension(300,300));
-        panelRonda.setBorder(BorderFactory.createTitledBorder("Ronda"));
-        panelRonda.setBackground(new Color(69, 201, 248, 255));
-
-        constraints.gridx=5;
-        constraints.gridy=3;
+        mensajesSalida= new JTextArea(2,28);
+        mensajesSalida.setText("Usa el botón (help) para ver las reglas del juego");
+        mensajesSalida.setBorder(BorderFactory.createTitledBorder("Atención: "));
+        mensajesSalida.setEditable(false);
+        mensajesSalida.setBackground(new Color(241, 113, 113, 255));
+        constraints.gridx=3;
+        constraints.gridy=5;
         constraints.gridwidth=3;
-        constraints.fill=GridBagConstraints.BOTH;
+        constraints.fill=GridBagConstraints.NONE;
         constraints.anchor=GridBagConstraints.CENTER;
-        add(panelRonda,constraints);
-
-
+        add(mensajesSalida,constraints);
     }
 }
 
